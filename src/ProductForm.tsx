@@ -14,14 +14,14 @@ function ProductForm() {
   const [isActive, setIsActive] =
     useState(false);
 
-  // NEW STATE
+
   const [productInfo, setProductInfo] =
     useState<any>(null);
 
   function handleSubmit(e: any) {
     e.preventDefault();
 
-    // SAVE DATA
+  
     setProductInfo({
       code,
       description,
