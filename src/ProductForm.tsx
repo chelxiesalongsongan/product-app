@@ -14,53 +14,110 @@ function ProductForm() {
   const [isActive, setIsActive] =
     useState(false);
 
+  // NEW STATE
+  const [productInfo, setProductInfo] =
+    useState<any>(null);
+
   function handleSubmit(e: any) {
     e.preventDefault();
+
+    // SAVE DATA
+    setProductInfo({
+      code,
+      description,
+      unitPrice,
+      isActive,
+    });
 
     alert("Product Saved!");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Product Form</h2>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <h2>Product Form</h2>
 
-      <InputField label="Code" value={code} onChange={(e) => setCode(e.target.value)}
-        required maxLength={10}
-      />
-
-      <TextAreaField label="Description" value={description} onChange={(e) => setDescription(e.target.value)
-        }
-        required
-        maxLength={200}
-      />
-
-      <InputField
-        label="Unit Price"
-        type="number"
-        value={unitPrice}
-        onChange={(e) =>
-          setUnitPrice(e.target.value)
-        }
-      />
-
-      <div>
-        <input
-          type="checkbox"
-          checked={isActive}
+        <InputField
+          label="Code"
+          value={code}
           onChange={(e) =>
-            setIsActive(e.target.checked)
+            setCode(e.target.value)
+          }
+          required
+          maxLength={10}
+        />
+
+        <TextAreaField
+          label="Description"
+          value={description}
+          onChange={(e) =>
+            setDescription(e.target.value)
+          }
+          required
+          maxLength={200}
+        />
+
+        <InputField
+          label="Unit Price"
+          type="number"
+          value={unitPrice}
+          onChange={(e) =>
+            setUnitPrice(e.target.value)
           }
         />
 
-        <label> Is Active</label>
-      </div>
+        <div>
+          <input
+            type="checkbox"
+            checked={isActive}
+            onChange={(e) =>
+              setIsActive(e.target.checked)
+            }
+          />
 
-      <br />
+          <label> Is Active</label>
+        </div>
 
-      <button type="submit">
-        Submit
-      </button>
-    </form>
+        <br />
+
+        <button type="submit">
+          Submit
+        </button>
+      </form>
+
+      {/* DISPLAY PRODUCT INFO */}
+      {productInfo && (
+        <div style={{ marginTop: "20px" }}>
+          <h2>
+            Product Info is Saved
+          </h2>
+
+          <h3>Product Details:</h3>
+
+          <p>
+            <strong>Code:</strong>{" "}
+            {productInfo.code}
+          </p>
+
+          <p>
+            <strong>Description:</strong>{" "}
+            {productInfo.description}
+          </p>
+
+          <p>
+            <strong>Unit:</strong>{" "}
+            {productInfo.unitPrice}
+          </p>
+
+          <p>
+            <strong>IsActive:</strong>{" "}
+            {productInfo.isActive
+              ? "Yes"
+              : "No"}
+          </p>
+        </div>
+      )}
+    </div>
   );
 }
 
